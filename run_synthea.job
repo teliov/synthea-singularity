@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#SBATCH -J synth1M
+#SBATCH -o op.%j.out
+#SBATCH -p general
+#SBATCH -n 8
+#SBATCH -c 2
+#SBATCH -t 06:00:00
+#SBATCH --mem  8G
+
+./synthea.sif -p 1000000  --exporter.fhir.export=false --exporter.practitioner.fhir.export=false --exporter.csv.export=true --exporter.baseDirectory=./output

@@ -1,0 +1,32 @@
+BootStrap: library
+From: ubuntu:18.04
+
+%post
+	apt-get update
+	apt-get -yq install default-jre default-jdk wget
+	mkdir -p /usr/local/lib/synthea
+	wget -O /usr/local/lib/synthea/synthea.jar https://tinyurl.com/rbrp3e3
+	
+	# create the executable
+	echo '#! /usr/bin/env bash' | tee -a /usr/local/bin/synthea
+	echo 'java -jar /usr/local/lib/synthea/synthea.jar "$@"' | tee -a /usr/local/bin/synthea
+	
+	# make executable
+	chmod a+x /usr/local/bin/synthea
+
+%runscript
+	synthea "$@"
+
+%labels
+	Author o.s.agba@student.tudelft.nl
+	Version v0.0.1
+	Name Singularity Container to run synthea on QCOE Cluster
+
+%help
+	This container contains a modified synthea jar file. The idea is to be able to run the synthea
+	generator in environments where java is not installed and where it is impossible or 
+	difficult to obtain root access but which already have singularity installed.
+
+	All the options which will be passed to synthea are also valid. Please see https://github.com/synthetichealth/synthea/wiki/Basic-Setup-and-Running#running-syntheatm for details on valid configuration options.
+
+	When running this container, it is best to mount a directory where the output files would be stored.
