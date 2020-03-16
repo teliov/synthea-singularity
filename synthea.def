@@ -1,11 +1,12 @@
 BootStrap: library
 From: ubuntu:18.04
 
+%files
+	./synthea.jar /usr/local/lib/synthea/synthea.jar
+
 %post
 	apt-get update
 	apt-get -yq install default-jre default-jdk wget
-	mkdir -p /usr/local/lib/synthea
-	wget -O /usr/local/lib/synthea/synthea.jar https://tinyurl.com/rbrp3e3
 	
 	# create the executable
 	echo '#! /usr/bin/env bash' | tee -a /usr/local/bin/synthea
