@@ -23,7 +23,7 @@ wget https://dl.google.com/go/go1.13.8.linux-amd64.tar.gz
 tar -C /usr/local -xzf go1.13.8.linux-amd64.tar.gz
 
 # add to path
-cat "export PATH=$PATH:/usr/local/go/bin" | tee -a /etc/profile
+echo "export PATH=$PATH:/usr/local/go/bin" | tee -a /etc/profile
 
 # reload the profile
 source /etc/profile
